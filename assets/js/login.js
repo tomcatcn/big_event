@@ -44,17 +44,19 @@ $(function() {
         })
         // 监听表单登陆事件
     $('#login').on('submit', function(e) {
+
         e.preventDefault();
         var data = $(this).serialize()
         $.post('/api/login', data, function(res) {
             if (res.status != 0) {
                 return layer.msg('登陆失败：' + res.message)
             }
-            layer.msg('登陆成功，正在跳转页面')
-                // 存贮token
+
+            // 存贮token
             localStorage.setItem('token', res.token)
             location.href = '/index.html'
 
         })
+
     })
 })
