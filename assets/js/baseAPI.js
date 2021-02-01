@@ -6,7 +6,7 @@ $.ajaxPrefilter(function(options) {
     }
 
     options.complete = function(jqXHR, status) {
-        console.log(jqXHR)
+
         if (jqXHR.responseJSON.status == 1) {
             location.href = '/login.html'
         }
