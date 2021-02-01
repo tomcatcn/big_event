@@ -38,7 +38,7 @@ function renderUserInfo(user) {
     //渲染名字
     $('#welcome').empty().html(username)
         // 渲染头像
-    if (user.uer_pic == null) {
+    if (user.user_pic == null) {
         var first = username[0].toUpperCase()
         $('.text-avatar').show().html(first)
         $('.layui-nav-img').hide()
