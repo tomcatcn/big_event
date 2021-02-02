@@ -46,7 +46,6 @@ $(function() {
                 content: $('#tpl-editForm').html() //这里content是一个普通的String
             });
             var id = $(this).attr('data-id')
-            console.log(id)
                 //填充数据
             $.ajax({
                 url: '/my/article/cates/' + id,
@@ -66,26 +65,47 @@ $(function() {
         // 代理监听修改提交事件
     $('body').on('submit', '#edit-form', function(e) {
 
-        e.preventDefault();
+            e.preventDefault();
+            $.ajax({
+                url: '/my/article/updatecate',
+                method: 'POST',
+                data: $(this).serialize(),
+                success: function(res) {
+                    if (res.status != 0) {
+                        return layer.msg(res.message)
+                    }
+
+                    // 更新数据到表格
+                    getArticle();
+                    layer.msg('修改成功')
+                        // 关闭弹出层
+                    layer.close(editindex)
+
+
+                }
+            })
+        })
+        // 代理监听删除分类事件
+    $('tbody').on('click', '#delete-category', function() {
+        var id = $(this).attr('data-id')
+            //填充数据
         $.ajax({
-            url: '/my/article/updatecate',
-            method: 'POST',
-            data: $(this).serialize(),
+            url: '/my/article/deletecate/' + id,
+            method: 'GET',
             success: function(res) {
                 if (res.status != 0) {
                     return layer.msg(res.message)
                 }
 
-                // 更新数据到表格
+                // 填充数据到表格
+                layer.msg(res.message)
                 getArticle();
-                layer.msg('修改成功')
-                    // 关闭弹出层
-                layer.close(editindex)
 
 
             }
         })
     })
+
 
 
 })

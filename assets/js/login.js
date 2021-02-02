@@ -44,7 +44,7 @@ $(function() {
         })
         // 监听表单登陆事件
     $('#login').on('submit', function(e) {
-
+        alert('11')
         e.preventDefault();
         var data = $(this).serialize()
         $.post('/api/login', data, function(res) {
